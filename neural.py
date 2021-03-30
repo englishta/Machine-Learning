@@ -1,5 +1,11 @@
+from math import gcd, pi, cos, sin, tan, e, atan2
+from collections import Counter, deque, defaultdict
+from heapq import heappush, heappop, heappushpop, heapify, heapreplace, merge
+from bisect import bisect_left, bisect_right, bisect, insort_left, insort_right, insort
+from itertools import accumulate, product, permutations, combinations, combinations_with_replacement
+
 import numpy as np
-import ActivationFunction as AF
+# import ActivationFunction as AF
 
 # 3層ニューラルネットワーク
 class ThreeLayerNetwork:
@@ -18,8 +24,16 @@ class ThreeLayerNetwork:
         self.w_ho = np.random.normal(0.0, 1.0, (self.onodes, self.hnodes))
 
         # 活性化関数
-        self.af = AF.sigmoid
-        self.daf = AF.derivative_sigmoid
+        def sigmoid(x):
+            sigmoid_range = 34.538776394910684
+            return 1.0 / (1.0 + np.exp(-np.clip(x, -sigmoid_range, sigmoid_range)))
+        def derivative_sigmoid(o):
+            return o * (1.0 - o)
+
+        self.af = sigmoid
+        self.daf = derivative_sigmoid
+
+
 
     # 誤差逆伝搬
     def backprop(self, idata, tdata):
