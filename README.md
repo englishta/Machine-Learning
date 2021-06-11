@@ -1,1 +1,1 @@
-# PythonによるC言語プログラム自動採点システム 
+# C language program automatic scoring system by Python
