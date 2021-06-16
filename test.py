@@ -1,9 +1,9 @@
-from parsing import Calculate
-import re
+from py2 import func
 
-s = "int a = (8*4)/(3+5);"
-s = s.replace(" ", "")
-s = s.replace(";", "")
-s = re.sub(r"(int|double).+=", '', s)
-print(Calculate(s))
-	
+d = {'hens' : 3, 'x' : 4}
+
+s = "int t = (hens*x)/(2-hens+5);"
+
+print(d)
+func(s, d)
+print(d)
