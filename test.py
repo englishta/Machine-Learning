@@ -1,4 +1,4 @@
-from py2 import parsing
+from parsing import func
 
 d = {'hens' : 3, 'x' : 4}
 
