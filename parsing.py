@@ -86,14 +86,28 @@ def deformate(Str, d):
         Str = search_var(Str, var, d)
     return Str
 
-def func(Str, d):
-    var = ""
-    Str = Str.replace(" ", "").replace(";", "")
-    for e in re.sub(r"(int|double)", "", Str):
-        if e == '=': break
-        var+=e
-    Str= re.sub(r"(int|double).+=", '', Str)
-    Str = deformate(Str, d)
-    Num = Calculate(Str)
-    print(var, "<--", Str,"=", Num)
-    d[var] = Num
+def func(String, d):
+    for Str in String.split(","):
+        var = ""
+        Str = Str.replace(" ", "").replace(";", "")
+        Str = re.sub(r"(int|double)", "", Str)
+        for e in Str:
+            if e == '=': break
+            var+=e
+        if not Str.count("="):
+            d[re.sub(r".+=", "", Str)] = "yet"
+            continue
+        
+        Str= re.sub(r".+=", '', Str)
+        Str = deformate(Str, d)
+
+        if bool(re.search(r'[a-zA-Z_]', Str)):
+            Error_word = re.sub(r'[0-9\(\)\*\+\-\/.]', "", Str)
+            print("宣言されていない変数名が使われています -->", Error_word)
+            for e in d.keys():
+                if e.count(Error_word):
+                    print(Error_word, "ではなく", e, "ではありませんか？")
+        else:
+            Num = Calculate(Str)
+            print(var, "<--", Str,"=", Num)
+            d[var] = Num
