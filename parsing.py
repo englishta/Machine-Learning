@@ -107,14 +107,16 @@ def func(String, d):
 
         if bool(re.search(r'[a-zA-Z_]', Str)):
             Error_word = re.sub(r'[0-9\(\)\*\+\-\/.]', "", Str)
-            print("宣言されていない変数名が使われています -->", Error_word)
-            for e in d.keys():
-                if e.count(Error_word):
-                    print(Error_word, "ではなく", e, "ではありませんか？")
+            if Error_word.count("yet"):
+                print("値が代入されていない変数が使われています！")
+            else:
+                print("宣言されていない変数名が使われています -->", Error_word)
+                for e in d.keys():
+                    if e.count(Error_word):
+                        print(Error_word, "ではなく", e, "ではありませんか？")
         else:
             Num = Calculate(Str)
             print(var, "<--", Str,"=", Num)
             d[var] = Num
-
 
 
