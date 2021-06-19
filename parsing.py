@@ -74,8 +74,12 @@ def search_var(Str, t, d):
     i = 0
     while i < n:
         if i<=n-q and Str[i:i+q] == t:
-            S+=str(d[t])
-            i+=q
+            if (i+q<n and Str[i+q] == t[0]) or (i-1>=0 and Str[i-1] == t[q-1]):
+                S+=Str[i]
+                i+=1
+            else:
+                S+=str(d[t])
+                i+=q
         else:
             S+=Str[i]
             i+=1
@@ -95,7 +99,7 @@ def func(String, d):
             if e == '=': break
             var+=e
         if not Str.count("="):
-            d[re.sub(r".+=", "", Str)] = "yet"
+            d[Str] = "yet"
             continue
         
         Str= re.sub(r".+=", '', Str)
@@ -111,3 +115,6 @@ def func(String, d):
             Num = Calculate(Str)
             print(var, "<--", Str,"=", Num)
             d[var] = Num
+
+
+
