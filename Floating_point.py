@@ -38,10 +38,8 @@ if s[idx] != 'E':
     Error()
 
 idx+=1
-if s[idx] == '+':
-    sign = '+'
-elif s[idx] == '-':
-    sign = '-'
+if s[idx] == '+' or s[idx] == '-':
+    sign = s[idx]
 else:
     Error()
 
@@ -52,5 +50,3 @@ while idx<n and s[idx].isdigit():
     idx+=1
 
 Express(b, i, e, sign)
-
-    
