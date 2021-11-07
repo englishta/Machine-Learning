@@ -26,7 +26,9 @@ def make_tree():
     return node, graph
 
 def dfs_struct_search(now, graph, node, struct_list):
-    if now >=20: return
+    # if 'Decl: main' in node[now]: return # main関数を読み込まない
+    if now>29: return
+
     if 'Struct:' in node[now]:
         struct_list.append(node[now].replace('Struct:', '').replace(' ', ''))
     for next in graph[now]:
@@ -57,9 +59,13 @@ def dfs_array_search2(now, graph, node, name, type, size):
 
 def review(struct_list, array_list):
     for st in struct_list:
+        used = False
         for comp in array_list:
             if comp.type == st:
-                print("Struct", st, "is Used in Array : ", comp.name)
+                used = True
+                print("Struct", st, "is Used in Array :", comp.name)
+        if not used:
+            print("Struct", st, "is Not Used")
 
 
 # 配列の情報を記録するクラス
@@ -85,5 +91,7 @@ if __name__ == "__main__":
         print(comp.name)
         print(comp.size)
         print(comp.type)
+    
+    print(struct_list)
 
     review(struct_list, array_list)
