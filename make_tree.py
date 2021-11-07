@@ -6,7 +6,7 @@ def make_tree():
             node.append(line)
 
     n = len(node)
-    depth = [-1]*n # depth[i]:=i?????????
+    depth = [-1]*n # depth[i]:=i行目のノードの深さ
 
     for i in range(n):
         depth[i] = (len(node[i])-len(node[i].lstrip(' ')))//2
@@ -43,37 +43,47 @@ def dfs_array_search1(now, graph, node, array_root):
 def dfs_array_search2(now, graph, node, name, type, size):
     if 'ID:' in node[now]:
         size = node[now].replace('ID:', '').replace(' ', '')
+    if 'IdentifierType:' in node[now]:
+        type = node[now].replace('IdentifierType:', '').replace(' ', '').replace('[', '').replace(']', '').replace("'", '')
+    if 'Struct:' in node[now]:
+        type = node[now].replace('Struct:', '').replace(' ', '')
+    if 'TypeDecl:' in node[now]:
+        name = node[now].replace('TypeDecl:', '').replace(' ', '').replace('[', '').replace(']', '').replace(',', '')
+
     for next in graph[now]:
-        if next < now: continue
+        if next < now: continue # 親は訪問しない
         name, type, size = dfs_array_search2(next, graph, node, name, type, size)
     return name, type, size
 
-# ?????????????        
+def review(struct_list, array_list):
+    for st in struct_list:
+        for comp in array_list:
+            if comp.type == st:
+                print("Struct", st, "is Used in Array : ", comp.name)
+
+
+# 配列の情報を記録するクラス
 class Array():
     def __init__(self, name, type, size):
         self.name = name
         self.type = type
         self.size = size
 
-def main(): 
+if __name__ == "__main__":
     node, graph = make_tree()
-    array_root = [] # ???????????
-    array_list = [] # Array???????????
+    array_root = [] # 配列宣言部分木の根番号
+    array_list = [] # Arrayクラスを要素に持つ配列
     struct_list = []
     dfs_struct_search(0, graph, node, struct_list)
-    dfs_array_search1(20, graph, node, array_root)
+    dfs_array_search1(0, graph, node, array_root)
     for id in array_root:
         name, type, size = dfs_array_search2(id, graph, node, "", "", "")
         comp = Array(name, type, size)
         array_list.append(comp)
     
-    print(array_root)
-    print(struct_list)
-    for e in array_list:
-        print(e.size)
-        print(e.type)
-        print(e.name)
-    
+    for comp in array_list:
+        print(comp.name)
+        print(comp.size)
+        print(comp.type)
 
-if __name__ == "__main__":
-    main()
+    review(struct_list, array_list)
