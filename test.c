@@ -9,6 +9,11 @@ struct person_dt{
     double weight;
 };
 
+struct temp{
+    int k;
+    double temparture;
+};
+
 
 int main(void){
     

@@ -18,6 +18,14 @@ FileAST:
       Decl: weight, [], [], []
         TypeDecl: weight, []
           IdentifierType: ['double']
+  Decl: None, [], [], []
+    Struct: temp
+      Decl: k, [], [], []
+        TypeDecl: k, []
+          IdentifierType: ['int']
+      Decl: temparture, [], [], []
+        TypeDecl: temparture, []
+          IdentifierType: ['double']
   FuncDef: 
     Decl: main, [], [], []
       FuncDecl: 
