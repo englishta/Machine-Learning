@@ -1,11 +1,8 @@
-# C language program automatic scoring system by Python
-## トポロジカル順の全列挙を行うプログラム
+# C 言語プログラム自動採点システム 
+## 使い方
 
-### 入力
+### コマンド
 ```math
-N M K
-A_1 B_1
-A_2 B_2
-...
-A_M B_M
+cat test2.c | grep -v "#include" | grep -v "#define" | python3 pycparser.py > abstract_tree.txt
+python3 make_tree.py > result.txt 
 ```
