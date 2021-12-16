@@ -1,0 +1,16 @@
+3
+5
+person_dt
+char_array name
+char sex
+int age
+double height
+double weight
+2
+temp
+int k
+double Temparture
+2
+temp2
+int a
+double temparture2
