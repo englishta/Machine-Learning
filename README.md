@@ -3,6 +3,8 @@
 
 ### コマンド
 ```math
-cat test2.c | grep -v "#include" | grep -v "#define" | python3 pycparser.py > abstract_tree.txt
-python3 make_tree.py > result.txt 
+cat test.c | grep -v "#include" | grep -v "#define" | python3 pycparser.py > abstract_tree.txt
+```
+```math
+python3 make_tree.py > result.txt
 ```
